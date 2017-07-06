@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>els</title>
+</head>
+<body>
+
+<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <a href=\"https://google.com\">It has survived not only five centuries<span>spantest</span></a>, but also the leap into <strong>electronic typesetting, remaining essentially </strong>unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+<!-- <p>my other tag</p>
+
+<strong>stronger tag</strong>
+
+<h1>main heading</h1> -->
+
+
+<script>
+
+function init() {
+	var query = 'body > *'
+	var all = document.querySelectorAll(query);
+	for (var i=0, max=all.length; i < max; i++) {
+
+	  var tagname = all[i].tagName;
+
+	  if (tagname !== 'SCRIPT') {
+
+	  	console.log(tagname)
+	  	console.log(all[i].textContent)
+
+		  if (all[i].querySelectorAll(':scope > *').length > 0) {
+		  	console.log( '- Children: ' + getElementChildren(all[i]).length )
+		  	console.log(getElementChildren(all[i]))
+		  } else {
+		  	console.log( '- ' + all[i].textContent)
+		  }
+	  	
+	  }
+
+	  // console.log([all[i].querySelectorAll(':scope > *')])
+	  // init(null)
+	}
+}
+
+function getElementChildren(parent) {
+	return parent.querySelectorAll(":scope > *");
+}
+
+
+init();
+
+
+
+
+</script>	
+</body>
+</html>

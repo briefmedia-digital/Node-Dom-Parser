@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HTML to JSON</title>
+</head>
+<body>
+<h2>in</h2>
+<textarea name="" id="in" cols="120" rows="10">
+
+<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <a href=\"https://google.com\">It has survived not only five centuries</a>, but also the leap into <strong>electronic typesetting, remaining essentially </strong>unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+</textarea>
+
+<h2>out</h2>
+<textarea name="" id="out" cols="120" rows="10"></textarea>
+<script>
+	
+var html = document.getElementById('in').value;
+
+var sample = [
+	{
+		id: 1,
+		type: 'p',
+		props: {},
+		children: [
+			{
+				id: 2,
+				type: 'strong',
+				props: {},
+				children: 'Lorem Ipsum'			
+			},
+			'&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
+			{
+				id: 3,
+				type: 'a',
+				props: {
+					href: 'https://google.com'
+				},
+				children: 'It has survived not only five centuries'
+			},
+			' but also the leap into ',
+			{
+				id: 4,
+				type: 'strong',
+				props: {},
+				children: 'electronic typesetting, remaining essentially'
+			},
+			'unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+		]
+	}
+];
+
+var parser = new DOMParser();
+var doc = parser.parseFromString(html, "text/xml");
+console.log(doc)
+
+ var result = Array.prototype.map.call(doc, function(e) {
+ 	console.log(e)
+ 	return e;
+ })
+
+var all = document.getElementsByTagName("*");
+for (var i=0, max=all.length; i < max; i++) {
+  // Do something with the element here
+  console.log( [all[i]] )
+}
+
+
+
+document.getElementById('out').value = JSON.stringify(result, null, 4)
+
+
+
+</script>
+
+
+	
+</body>
+</html>

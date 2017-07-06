@@ -1,0 +1,18 @@
+{
+  "name": "dom-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "casperjs": "^1.1.4",
+    "express": "^4.15.3",
+    "himalaya": "^0.2.10",
+    "jquery": "^3.2.1"
+  }
+}

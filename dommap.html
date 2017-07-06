@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dommapper</title>
+</head>
+<body>
+
+<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <a href=\"https://google.com\">It has survived not only five centuries<span>spantest</span></a>, but also the leap into <strong>electronic typesetting, remaining essentially </strong>unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+<textarea name="" id="out" cols="120" rows="10"></textarea>
+
+<script>
+
+// fetch('http://localhost/bm-projects/dom-parser/cb.html').then(function(response) {
+//   return response.text();
+// }).then(function(content) {
+// });
+// var initElement = document.body;
+var initElement = '<div>test<span>span tag text</span></div>';
+var json = mapDOM(initElement, false);
+// console.log(json);
+
+document.getElementById('out').value = JSON.stringify(json, null, 4)
+
+
+
+function mapDOM(element, json) {
+    var treeObject = {};
+    // If string convert to document Node
+    if (typeof element === "string") {
+        if (window.DOMParser) {
+              parser = new DOMParser();
+              docNode = parser.parseFromString(element,"text/xml");
+        } else { // Microsoft strikes again
+              docNode = new ActiveXObject("Microsoft.XMLDOM");
+              docNode.async = false;
+              docNode.loadXML(element); 
+        } 
+        element = docNode.firstChild;
+    }
+
+    //Recursively loop through DOM elements and assign properties to object
+    function treeHTML(element, object) {
+        console.log(element)
+        if (element.nodeName !== 'SCRIPT') { 
+            object["type"] = element.nodeName;
+            var nodeList = element.childNodes;
+            if (nodeList != null) {
+                if (nodeList.length) {
+                    object["content"] = [];
+                    for (var i = 0; i < nodeList.length; i++) {
+                        if (nodeList[i].nodeType == 3) {
+                            object["content"].push(nodeList[i].nodeValue);
+                        } else {
+                            object["content"].push({});
+                            treeHTML(nodeList[i], object["content"][object["content"].length -1]);
+                        }
+                    }
+                }
+            }
+            if (element.attributes != null) {
+                if (element.attributes.length) {
+                    object["attributes"] = {};
+                    for (var i = 0; i < element.attributes.length; i++) {
+                        object["attributes"][element.attributes[i].nodeName] = element.attributes[i].nodeValue;
+                    }
+                }
+            }
+        }
+    }
+    treeHTML(element, treeObject);
+
+    return (json) ? JSON.stringify(treeObject) : treeObject;
+}
+</script>
+</body>
+</html>
