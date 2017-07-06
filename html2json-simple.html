@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<main>
+	
+<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <a href="https://google.com">It has survived not only five centuries</a>, but also the leap into <strong>electronic typesetting, remaining essentially </strong>unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+</main>
+
+
+<script>
+	const Elem = e => ({
+	  toJSON : () => ({
+	    tagName: 
+	      e.tagName,
+	    textContent:
+	      e.textContent,
+	    attributes:
+	      Array.from(e.attributes, ({name, value}) => [name, value]),
+	    children:
+	      Array.from(e.children, Elem)
+	  })
+	})
+
+// html2json :: Node -> JSONString
+const html2json = e =>
+  JSON.stringify(Elem(e), null, '  ')
+  
+console.log(html2json(document.querySelector('main')))
+</script>
+	
+</body>
+</html>
