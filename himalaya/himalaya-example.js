@@ -1,3 +1,7 @@
+/**
+ * Sraping Live CB
+ * @type {[type]}
+ */
 var casper = require('casper').create();
 var himalaya = require('himalaya')
 var fs = require('fs')
@@ -18,7 +22,7 @@ casper.start('https://www.cliniciansbrief.com/article/echinococcus-spp-tapeworms
   body_html = body_html.replace(/\n/g, '')
   body_html = body_html.replace(/\t/g, '')
 	var json = himalaya.parse(body_html)
-	fs.write('./himalaya-output-NEW.json', JSON.stringify(json, null, 4), function(err){})
+	fs.write('./himalaya-output.json', JSON.stringify(json, null, 4), function(err){})
 });
 
 casper.run();

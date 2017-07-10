@@ -72,7 +72,7 @@ casper.then(function(){
 	mystring += JSON.stringify(paragraph_types, null, 4) + "\n";
 	mystring += JSON.stringify(field_html, null, 4) + "\n";
   
-  fs.write('./testhtml.html', mystring, function(err){
+  fs.write('./output.json', mystring, function(err){
   	console.log('error')
   });
 	

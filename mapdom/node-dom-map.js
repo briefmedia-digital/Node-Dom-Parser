@@ -18,7 +18,7 @@ casper.start('http://localhost/bm-projects/dom-parser/simple-valid.html', functi
 	var result = mapDOM(body_html, false)
 	var json = JSON.stringify(result, null, 4)
 
-  fs.write('./mynewfile.html', json, function(err){
+  fs.write('./output.json', json, function(err){
   	console.log('error')
   });
 });
