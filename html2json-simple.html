@@ -7,19 +7,19 @@
 <body>
 
 <main>
-	
-<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <a href="https://google.com">It has survived not only five centuries</a>, but also the leap into <strong>electronic typesetting, remaining essentially </strong>unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+<p class="mt1 pb5"><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <a href="https://google.com">It has survived not only five centuries</a>, but also the leap into <strong>electronic typesetting, remaining essentially </strong>unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 </main>
 
 
 <script>
+// CREDIT: https://stackoverflow.com/questions/12980648/map-html-to-json
 	const Elem = e => ({
 	  toJSON : () => ({
-	    tagName: 
+	    type: 
 	      e.tagName,
 	    textContent:
 	      e.textContent,
-	    attributes:
+	    props:
 	      Array.from(e.attributes, ({name, value}) => [name, value]),
 	    children:
 	      Array.from(e.children, Elem)
@@ -27,10 +27,11 @@
 	})
 
 // html2json :: Node -> JSONString
-const html2json = e =>
-  JSON.stringify(Elem(e), null, '  ')
-  
-console.log(html2json(document.querySelector('main')))
+const html2json = e => JSON.stringify(Elem(e), null, '  ')
+
+var json = html2json(document.querySelector('main'));
+
+console.log(json)
 </script>
 	
 </body>

@@ -16,7 +16,7 @@ function getParagraphsHtmlClasses() {
 	});
 }
 
-function trythis() {
+function scrapeFields() {
 	var paragraphs = document.querySelectorAll('.paragraph');
 	return Array.prototype.map.call(paragraphs, function(e) {
 		
@@ -50,10 +50,10 @@ function trythis() {
 	});
 }
 
-function getTextFieldContent() {
-	// field__item
-	return 'hello world'
-}
+/**
+ * Process textcontent
+ */
+function getTextFieldContent() { }
 
 casper.then(function(){
 
@@ -63,7 +63,7 @@ casper.then(function(){
 	var paragraphClasses = this.evaluate(getParagraphsHtmlClasses)
 	this.echo('elements selected');
 
-	var field_values = this.evaluate(trythis)
+	var field_values = this.evaluate(scrapeFields)
 
 	var mystring = '';
 	var paragraph_types = paragraphClasses;
